@@ -1,6 +1,7 @@
 Ok what will the data look like?
 
 -Demons
+-Tathemet-The first-the Prime Evil
   -Prime Evils
     -Diablo
     -Mephisto
@@ -17,6 +18,7 @@ Ok what will the data look like?
 
 
 -Angels
+-Anu -The first -the Diamond Warrior
 -Angeris Council
   -Arch Angels
   -Tyreal
@@ -68,4 +70,11 @@ Ok what will the data look like?
 
     -Other Dieties 
       -Gods and stuff
+
+      -Legendary Items
+        -Weapons
+        -Armor
+        -Jewels
+        -Rings
+        -Amulets
 "# DiabloDB" 
