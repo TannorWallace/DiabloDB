@@ -28,7 +28,35 @@ namespace DiabloDB
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+      services.AddCors(options =>
+                {
+                  options.AddPolicy("CorsDevPolicy", builder =>
+                        {
+                          builder
+                                    .WithOrigins(new string[]{
+                                "http://localhost:8080"
+                                })
+                                    .AllowAnyMethod()
+                                    .AllowAnyHeader()
+                                    .AllowCredentials();
+                        });
+                });
+      services.AddMvc();
+      // TODO register all Transient informations
+      services.AddTransient<IDbConnection>(x => CreateDBContext());
+
+
+
+
+
+    }
+
+    private IDbConnection CreateDBContext()
+    {
+      var _connectionString = Configuration.GetSection("DB").GetValue<string>("gearhost");
+      var connection = new MySqlConnection(_connectionString);
+      connection.Open();
+      return connection;
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,14 +65,17 @@ namespace DiabloDB
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
+        app.UseCors("CorsDevPolicy");
       }
       else
       {
-        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
         app.UseHsts();
       }
+      //NOTE I dont remember what UseHttpsRedirection is but it was in the reference so better safe than sorry (shrug)
+      // app.UseHttpsRedirection();
 
-      app.UseHttpsRedirection();
+      app.UseDefaultFiles();
+      app.UseStaticFiles();
       app.UseMvc();
     }
   }
