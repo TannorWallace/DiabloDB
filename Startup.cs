@@ -44,6 +44,15 @@ namespace DiabloDB
       services.AddMvc();
       // TODO register all Transient informations
       services.AddTransient<IDbConnection>(x => CreateDBContext());
+      services.AddTransient<AngelRepository>();
+      services.AddTransient<DemonsRepository>();
+      services.AddTransient<FactionsRepository>();
+      services.AddTransient<HeroesRepository>();
+      services.AddTransient<LegendaryItemRepository>();
+      services.AddTransient<LocationRepository>();
+      services.AddTransient<NephilemRepository>();
+      services.AddTransient<OtherDietiesRepository>();
+
 
 
 
